@@ -1,8 +1,11 @@
-import { Before, After, Status } from '@cucumber/cucumber';
+import { Before, After, Status, setDefaultTimeout } from '@cucumber/cucumber';
 import { chromium } from 'playwright';
 import fs from 'fs';
 import path from 'path';
 import { CustomWorld } from './world';
+
+// Give each step up to 30 seconds by default – safer for UI tests.
+setDefaultTimeout(30_000);
 
 Before(async function (this: CustomWorld) {
   const headlessEnv = process.env.HEADLESS;
@@ -21,7 +24,7 @@ After(async function (this: CustomWorld, scenario: any) {
     fs.mkdirSync(artifactsDir, { recursive: true });
 
     const safeName = pickle?.name
-      ? pickle.name.replace(/[^a-z0-9\-]+/gi, '_').toLowerCase()
+      ? pickle.name.replace(/[^a-z0-9\\-]+/gi, '_').toLowerCase()
       : 'scenario';
 
     const filePath = path.join(
