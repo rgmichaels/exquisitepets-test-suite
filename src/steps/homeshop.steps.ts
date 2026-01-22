@@ -1,6 +1,8 @@
 import { Then } from '@cucumber/cucumber';
 import type { DataTable } from '@cucumber/cucumber';
 import assert from 'node:assert';
+import fs from 'fs';
+import path from 'path';
 import { CustomWorld } from '../support/world';
 import { HomeShopPage } from '../pages/HomeShopPage';
 
@@ -45,8 +47,8 @@ Then(
 );
 
 Then(
-  'the product data should be visible for each product',
-  async function (this: CustomWorld, table: DataTable) {
+  'the product data from {string} should be visible',
+  async function (this: CustomWorld, fileName: string) {
     if (!this.page) {
       throw new Error('Playwright page is not initialized on world.');
     }
@@ -54,19 +56,31 @@ Then(
     const homePage = new HomeShopPage(this.page, this.baseUrl);
     await homePage.goto();
 
-    const rows = table.hashes();
+    // Resolve the data file relative to the project root
+    const filePath = path.join(process.cwd(), 'data', fileName);
 
-    for (const row of rows) {
-      const productName = row.productName;
-      const productPrice = row.productPrice;
+    if (!fs.existsSync(filePath)) {
+      throw new Error(`Data file not found at: ${filePath}`);
+    }
+
+    const raw = fs.readFileSync(filePath, 'utf-8');
+    let products: Array<{ productName: string; productPrice: string }>;
+    try {
+      products = JSON.parse(raw);
+    } catch (err) {
+      throw new Error(`Failed to parse JSON from ${filePath}: ${(err as Error).message}`);
+    }
+
+    for (const product of products) {
+      const { productName, productPrice } = product;
 
       if (!productName || !productPrice) {
         throw new Error(
-          'Each row must have "productName" and "productPrice" columns.'
+          `Invalid product entry in ${fileName}. Each product must have "productName" and "productPrice".`
         );
       }
 
-      // Find the actual product link/card <a> that contains the full product name text.
+      // Find the product card <a> that contains the full product name text.
       const productCard = this.page
         .locator('a', { hasText: productName })
         .first();
@@ -81,13 +95,11 @@ Then(
 
       const cardText = (await productCard.textContent()) ?? '';
 
-      // Double-check the name is present on the card (sanity).
       assert.ok(
         cardText.includes(productName),
         `Expected product card text to include name "${productName}", but got:\n${cardText}`
       );
 
-      // And explicitly check that the price is part of THAT same card.
       assert.ok(
         cardText.includes(productPrice),
         `Expected product "${productName}" card text to include price "${productPrice}", but got:\n${cardText}`
