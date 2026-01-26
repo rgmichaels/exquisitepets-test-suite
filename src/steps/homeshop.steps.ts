@@ -107,3 +107,25 @@ Then(
     }
   }
 );
+
+Then(
+  'the footer should contain the email {string}',
+  async function (this: CustomWorld, expectedEmail: string) {
+    if (!this.page) {
+      throw new Error('Playwright page is not initialized on world.');
+    }
+
+    const homePage = new HomeShopPage(this.page, this.baseUrl);
+    await homePage.goto();
+
+    const footer = this.page.locator('footer');
+    await footer.waitFor({ state: 'visible', timeout: 10_000 });
+
+    const footerText = (await footer.innerText()).trim();
+
+    assert.ok(
+      footerText.includes(expectedEmail),
+      `Expected footer to include "${expectedEmail}", but got:\n${footerText}`
+    );
+  }
+);
