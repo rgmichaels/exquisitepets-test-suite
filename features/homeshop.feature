@@ -23,9 +23,9 @@ Feature: HomeShop page
       Given I open the "HomeShop" page
       Then the header should show social media links
         | platform  | url                                      |
-        | Facebook  | https://www.facebook.com/profile.php?id=61568892960296&mibextid=wwXIfr&rdid=eKj6jYsk4Ua851Yq&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F16pgtnj9vf%2F%3Fmibextid%3DwwXIfr# |
-        | Instagram | https://www.instagram.com/exquisite_pets?igsh=OHA5enI1dTF1ZGJl&utm_source=qr|
+        | Facebook  | https://www.facebook.com/share/16pgtnj9vf/ |
+        | Instagram | https://www.instagram.com/exquisite_pets|
 
   Scenario: Home page shows contact email in footer
-    Given I open the home page
+    Given I open the "HomeShop" page
     Then the footer should contain the email "email: Exquisitepetsltd@yahoo.com"
