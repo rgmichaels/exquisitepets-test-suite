@@ -109,6 +109,43 @@ Then(
 );
 
 Then(
+  'the product images from {string} should load and have alt text',
+  async function (this: CustomWorld, fileName: string) {
+    if (!this.page) {
+      throw new Error('Playwright page is not initialized on world.');
+    }
+
+    const homePage = new HomeShopPage(this.page, this.baseUrl);
+    await homePage.goto();
+
+    const filePath = path.join(process.cwd(), 'data', fileName);
+    if (!fs.existsSync(filePath)) {
+      throw new Error(`Data file not found at: ${filePath}`);
+    }
+
+    const raw = fs.readFileSync(filePath, 'utf-8');
+    let products: Array<{ productName: string; productPrice: string }>;
+    try {
+      products = JSON.parse(raw);
+    } catch (err) {
+      throw new Error(`Failed to parse JSON from ${filePath}: ${(err as Error).message}`);
+    }
+
+    for (const product of products) {
+      const { productName } = product;
+
+      if (!productName) {
+        throw new Error(
+          `Invalid product entry in ${fileName}. Each product must have "productName".`
+        );
+      }
+
+      await homePage.assertProductImageLoads(productName);
+    }
+  }
+);
+
+Then(
   'the footer should contain the email {string}',
   async function (this: CustomWorld, expectedEmail: string) {
     if (!this.page) {
