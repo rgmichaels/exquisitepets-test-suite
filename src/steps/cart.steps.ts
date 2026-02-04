@@ -75,3 +75,10 @@ Then('the cart should be empty', async function (this: CustomWorld) {
   await cart.goto();
   await cart.assertEmpty();
 });
+
+Then('the cart should show the empty message', async function (this: CustomWorld) {
+  const page = requirePage(this);
+
+  const cart = new CartPage(page, this.baseUrl);
+  await cart.assertEmptyMessageVisible();
+});

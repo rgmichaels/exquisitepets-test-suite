@@ -137,6 +137,12 @@ export class CartPage extends BasePage {
     assert.ok(true, 'Cart is empty.');
   }
 
+  async assertEmptyMessageVisible(): Promise<void> {
+    await this.goto();
+    await this.waitForCartShell();
+    await this.emptyMessage.waitFor({ state: 'visible', timeout: 10_000 });
+  }
+
   /**
    * The reliable removal loop:
    * - record starting item count

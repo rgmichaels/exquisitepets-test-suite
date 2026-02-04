@@ -2,6 +2,13 @@
 
 Feature: Shopping cart
 
+  @smoke
+  Scenario: Cart page shows empty state
+    Given the shopping cart is empty
+    When I open the cart page
+    Then the cart should be empty
+    And the cart should show the empty message
+
   Scenario: Add a product to the cart and remove it
     Given the shopping cart is empty
     And I open the "HomeShop" page
