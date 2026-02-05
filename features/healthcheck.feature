@@ -1,0 +1,10 @@
+@smoke @healthcheck
+Feature: Basic healthcheck
+
+  As a visitor
+  I want to open the HomeShop page
+  So that I can confirm the site is reachable
+
+  Scenario: HomeShop page returns OK (healthcheck)
+    Given I open the "HomeShop" page
+    Then the navigation response should be OK
