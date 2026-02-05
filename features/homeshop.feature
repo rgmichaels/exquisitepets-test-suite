@@ -30,6 +30,13 @@ Feature: HomeShop page
       | Facebook  | https://www.facebook.com/share/16pgtnj9vf/ |
       | Instagram | https://www.instagram.com/exquisite_pets   |
 
+  Scenario: Home Page header shows navigation links
+    Given I open the "HomeShop" page
+    Then the header should show navigation links
+      | label   | url      |
+      | About   | /about   |
+      | Contact | /contact |
+
   Scenario: Home page shows contact email in footer
     Given I open the "HomeShop" page
     Then the footer should contain the email "email: Exquisitepetsltd@yahoo.com"
