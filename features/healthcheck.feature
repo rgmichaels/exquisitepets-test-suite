@@ -16,3 +16,7 @@ Feature: Basic healthcheck
   Scenario: Contact page returns OK (healthcheck)
     Given I open the "Contact" page
     Then the navigation response should be OK
+
+  Scenario: Cart page returns OK (healthcheck)
+    Given I open the "Cart" page
+    Then the navigation response should be OK
