@@ -4,6 +4,7 @@ import { CustomWorld } from '../support/world';
 import { HomeShopPage } from '../pages/HomeShopPage';
 import { AboutPage } from '../pages/AboutPage';
 import { ContactPage } from '../pages/ContactPage';
+import { CartPage } from '../pages/CartPage';
 
 function resolvePage(world: CustomWorld, name: string) {
   if (!world.page) {
@@ -17,6 +18,8 @@ function resolvePage(world: CustomWorld, name: string) {
       return new AboutPage(world.page, world.baseUrl);
     case 'Contact':
       return new ContactPage(world.page, world.baseUrl);
+    case 'Cart':
+      return new CartPage(world.page, world.baseUrl);
     default:
       throw new Error(`Unknown page name: "${name}".`);
   }
