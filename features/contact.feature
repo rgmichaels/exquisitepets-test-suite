@@ -14,3 +14,7 @@ Feature: Contact page
     Given I open the Contact page
     Then the Contact page should display header and helper text
     And the Contact page should show the contact form fields and SEND button
+
+  Scenario: Contact page shows form fields
+    Given I open the Contact page
+    Then the Contact page should show the contact form fields and SEND button
