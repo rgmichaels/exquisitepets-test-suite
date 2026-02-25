@@ -3,6 +3,11 @@
 Feature: Shopping cart
 
   @smoke
+  Scenario: Cart page returns OK
+    Given I open the "Cart" page
+    Then the navigation response should be OK
+
+  @smoke
   Scenario: Cart page shows empty state
     Given the shopping cart is empty
     When I open the cart page
