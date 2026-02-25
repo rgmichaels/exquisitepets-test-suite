@@ -14,3 +14,7 @@ Feature: Contact page
     Given I open the Contact page
     Then the Contact page should display header and helper text
     And the Contact page should show the contact form fields and SEND button
+
+  Scenario: Contact page footer shows support email
+    Given I open the "Contact" page
+    Then the footer should contain the email "email: Exquisitepetsltd@yahoo.com"
