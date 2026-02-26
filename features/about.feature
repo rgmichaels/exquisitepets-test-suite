@@ -13,8 +13,12 @@ Feature: About page
     Given I open the "About" page
     Then the About page should display the About Us content
 
+  Scenario: About page loads content after navigation
+    Given I open the "About" page
+    Then the navigation response should be OK
+    And the About page should display the About Us content
+
   @wip
   Scenario: About page shows required form fields
     Given I open the "About" page
     Then the About page should show the required form fields
-
