@@ -12,3 +12,4 @@ Feature: SEO essentials
       | HomeShop |
       | About    |
       | Contact  |
+      | Cart     |

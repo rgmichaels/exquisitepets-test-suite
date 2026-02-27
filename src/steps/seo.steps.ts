@@ -4,6 +4,7 @@ import { CustomWorld } from '../support/world';
 import { HomeShopPage } from '../pages/HomeShopPage';
 import { AboutPage } from '../pages/AboutPage';
 import { ContactPage } from '../pages/ContactPage';
+import { CartPage } from '../pages/CartPage';
 import { BasePage } from '../pages/BasePage';
 
 function resolveCurrentPage(world: CustomWorld): BasePage {
@@ -15,6 +16,7 @@ function resolveCurrentPage(world: CustomWorld): BasePage {
   if (path === '/' || path === '') return new HomeShopPage(world.page, world.baseUrl);
   if (path.startsWith('/about')) return new AboutPage(world.page, world.baseUrl);
   if (path.startsWith('/contact')) return new ContactPage(world.page, world.baseUrl);
+  if (path.startsWith('/cart')) return new CartPage(world.page, world.baseUrl);
 
   throw new Error(
     `SEO step does not know how to map the current URL to a Page Object.\nCurrent URL: ${world.page.url()}`
