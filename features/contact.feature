@@ -22,3 +22,7 @@ Feature: Contact page
   Scenario: Contact page footer shows support email
     Given I open the "Contact" page
     Then the footer should contain the email "email: Exquisitepetsltd@yahoo.com"
+
+  Scenario: Contact page footer shows support email after in-site navigation
+    Given I open the Contact page
+    Then the footer should contain the email "email: Exquisitepetsltd@yahoo.com"
