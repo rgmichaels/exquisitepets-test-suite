@@ -20,3 +20,7 @@ Feature: Basic healthcheck
   Scenario: Cart page returns OK (healthcheck)
     Given I open the "Cart" page
     Then the navigation response should be OK
+
+  Scenario: HomeShop page has a non-empty title (healthcheck)
+    Given I open the "HomeShop" page
+    Then the page should have a non-empty title
