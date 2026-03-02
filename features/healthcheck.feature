@@ -24,3 +24,7 @@ Feature: Basic healthcheck
   Scenario: HomeShop page has a non-empty title (healthcheck)
     Given I open the "HomeShop" page
     Then the page should have a non-empty title
+
+  Scenario: About page has a non-empty title (healthcheck)
+    Given I open the "About" page
+    Then the page should have a non-empty title
