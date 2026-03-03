@@ -28,3 +28,7 @@ Feature: Basic healthcheck
   Scenario: About page has a non-empty title (healthcheck)
     Given I open the "About" page
     Then the page should have a non-empty title
+
+  Scenario: Contact page has a non-empty title (healthcheck)
+    Given I open the "Contact" page
+    Then the page should have a non-empty title
