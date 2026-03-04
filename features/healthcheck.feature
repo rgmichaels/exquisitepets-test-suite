@@ -32,3 +32,7 @@ Feature: Basic healthcheck
   Scenario: Contact page has a non-empty title (healthcheck)
     Given I open the "Contact" page
     Then the page should have a non-empty title
+
+  Scenario: Cart page has a non-empty title (healthcheck)
+    Given I open the "Cart" page
+    Then the page should have a non-empty title
