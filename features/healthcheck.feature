@@ -36,3 +36,7 @@ Feature: Basic healthcheck
   Scenario: Cart page has a non-empty title (healthcheck)
     Given I open the "Cart" page
     Then the page should have a non-empty title
+
+  Scenario: HomeShop page canonical url matches current url (healthcheck)
+    Given I open the "HomeShop" page
+    Then the canonical url should match the current url
