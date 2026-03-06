@@ -40,3 +40,7 @@ Feature: Basic healthcheck
   Scenario: HomeShop page canonical url matches current url (healthcheck)
     Given I open the "HomeShop" page
     Then the canonical url should match the current url
+
+  Scenario: Contact page canonical url matches current url (healthcheck)
+    Given I open the "Contact" page
+    Then the canonical url should match the current url
