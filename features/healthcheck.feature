@@ -44,3 +44,7 @@ Feature: Basic healthcheck
   Scenario: Contact page canonical url matches current url (healthcheck)
     Given I open the "Contact" page
     Then the canonical url should match the current url
+
+  Scenario: About page canonical url matches current url (healthcheck)
+    Given I open the "About" page
+    Then the canonical url should match the current url
