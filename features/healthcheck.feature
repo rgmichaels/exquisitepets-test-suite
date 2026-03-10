@@ -48,3 +48,7 @@ Feature: Basic healthcheck
   Scenario: About page canonical url matches current url (healthcheck)
     Given I open the "About" page
     Then the canonical url should match the current url
+
+  Scenario: Cart page canonical url matches current url (healthcheck)
+    Given I open the "Cart" page
+    Then the canonical url should match the current url
