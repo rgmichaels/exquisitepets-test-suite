@@ -48,3 +48,8 @@ Feature: Basic healthcheck
   Scenario: About page canonical url matches current url (healthcheck)
     Given I open the "About" page
     Then the canonical url should match the current url
+
+  Scenario: Cart page shows empty message when empty (healthcheck)
+    Given the shopping cart is empty
+    When I open the cart page
+    Then the cart should show the empty message
