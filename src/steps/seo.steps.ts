@@ -33,6 +33,11 @@ Then('the page should have a meta description', async function (this: CustomWorl
   await pageObject.assertHasMetaDescription();
 });
 
+Then('the page should have a meta description tag', async function (this: CustomWorld) {
+  const pageObject = resolveCurrentPage(this);
+  await pageObject.assertHasMetaDescriptionTag();
+});
+
 Then('the canonical url should match the current url', async function (this: CustomWorld) {
   const pageObject = resolveCurrentPage(this);
   await pageObject.assertCanonicalMatchesCurrentUrl();
