@@ -195,6 +195,14 @@ export abstract class BasePage {
     );
   }
 
+  async assertHasMetaDescriptionTag(): Promise<void> {
+    const tag = await this.page.$('meta[name="description"]');
+    assert.ok(
+      tag,
+      `Expected a meta[name="description"] tag to be present on ${this.page.url()}, but none was found.`
+    );
+  }
+
   async assertCanonicalMatchesCurrentUrl(): Promise<void> {
     const canonical = await this.getCanonicalUrl();
     assert.ok(canonical, 'Expected link[rel="canonical"] to exist.');

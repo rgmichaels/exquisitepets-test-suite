@@ -53,3 +53,7 @@ Feature: Basic healthcheck
     Given the shopping cart is empty
     When I open the cart page
     Then the cart should show the empty message
+
+  Scenario: HomeShop page has a meta description tag (healthcheck)
+    Given I open the "HomeShop" page
+    Then the page should have a meta description tag
