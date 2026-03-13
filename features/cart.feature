@@ -14,6 +14,10 @@ Feature: Shopping cart
     Then the cart should be empty
     And the cart should show the empty message
 
+  Scenario: Cart page has a non-empty title
+    Given I open the "Cart" page
+    Then the page should have a non-empty title
+
   Scenario: Add a product to the cart and remove it
     Given the shopping cart is empty
     And I open the "HomeShop" page
