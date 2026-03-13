@@ -57,3 +57,7 @@ Feature: Basic healthcheck
   Scenario: HomeShop page has a meta description tag (healthcheck)
     Given I open the "HomeShop" page
     Then the page should have a meta description tag
+
+  Scenario: Contact page has a meta description tag (healthcheck)
+    Given I open the "Contact" page
+    Then the page should have a meta description tag
