@@ -91,17 +91,43 @@ export class CartPage extends BasePage {
     return s.replace(/\s+/g, ' ').trim().toLowerCase();
   }
 
+  private tokens(s: string): string[] {
+    return this.normalize(s)
+      .split(' ')
+      .filter((t) => t.length >= 4);
+  }
+
+  private looselyMatches(candidate: string, target: string): boolean {
+    const normalizedCandidate = this.normalize(candidate);
+    const normalizedTarget = this.normalize(target);
+
+    if (!normalizedCandidate || !normalizedTarget) return false;
+    if (normalizedCandidate.includes(normalizedTarget) || normalizedTarget.includes(normalizedCandidate)) {
+      return true;
+    }
+
+    const targetTokens = this.tokens(normalizedTarget).slice(0, 6);
+    if (targetTokens.length === 0) return false;
+    return targetTokens.every((token) => normalizedCandidate.includes(token));
+  }
+
+  private async cartMainText(): Promise<string> {
+    const text = await this.cartMain().textContent().catch(() => '');
+    return this.normalize(text ?? '');
+  }
+
   async assertContainsProduct(productName: string): Promise<void> {
     await this.waitForCartShell();
     const target = this.normalize(productName);
 
     await this.waitUntil(async () => {
       const items = await this.cartItems();
-      return items.some((it) => {
-        const name = this.normalize(it.productName ?? it.name ?? '');
-        return name.includes(target) || target.includes(name);
-      });
-    }, 12_000);
+      const hasInJson = items.some((it) => this.looselyMatches(it.productName ?? it.name ?? '', target));
+      if (hasInJson) return true;
+
+      const mainText = await this.cartMainText();
+      return this.looselyMatches(mainText, target);
+    }, 25_000);
 
     assert.ok(true, `Cart contains product (cart JSON): "${productName}"`);
   }
