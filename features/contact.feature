@@ -26,3 +26,8 @@ Feature: Contact page
   Scenario: Contact page footer shows support email after in-site navigation
     Given I open the Contact page
     Then the footer should contain the email "email: Exquisitepetsltd@yahoo.com"
+
+  @smoke
+  Scenario: Contact page has a meta description tag
+    Given I open the "Contact" page
+    Then the page should have a meta description tag
