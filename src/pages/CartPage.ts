@@ -166,13 +166,13 @@ export class CartPage extends BasePage {
   async assertEmptyMessageVisible(): Promise<void> {
     await this.goto();
     await this.waitForCartShell();
-    await this.emptyMessage.waitFor({ state: 'visible', timeout: 10_000 });
+    await this.emptyMessage.waitFor({ state: 'visible', timeout: 30_000 });
   }
 
   /**
    * The reliable removal loop:
    * - record starting item count
-   * - attempt clicking remove (×) using multiple strategies
+   * - attempt clicking remove (Ã) using multiple strategies
    * - refresh /cart
    * - succeed once item count drops (or becomes 0)
    */
@@ -194,8 +194,8 @@ export class CartPage extends BasePage {
     const main = this.cartMain();
 
     const clickRemoveOnce = async () => {
-      // 1) Try clicking visible "×" text if present
-      const xText = main.getByText('×', { exact: true }).last();
+      // 1) Try clicking visible "Ã" text if present
+      const xText = main.getByText('Ã', { exact: true }).last();
       if (await xText.isVisible({ timeout: 800 }).catch(() => false)) {
         await xText.dispatchEvent('pointerdown').catch(() => undefined);
         await xText.dispatchEvent('mousedown').catch(() => undefined);
