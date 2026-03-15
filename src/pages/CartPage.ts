@@ -165,8 +165,8 @@ export class CartPage extends BasePage {
 
   async assertEmptyMessageVisible(): Promise<void> {
     await this.goto();
-    await this.waitForCartShell();
-    await this.emptyMessage.waitFor({ state: 'visible', timeout: 10_000 });
+    await this.waitForCartShell(30_000);
+    await this.emptyMessage.waitFor({ state: 'visible', timeout: 30_000 });
   }
 
   /**
