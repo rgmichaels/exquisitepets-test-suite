@@ -61,3 +61,7 @@ Feature: Basic healthcheck
   Scenario: Contact page has a meta description tag (healthcheck)
     Given I open the "Contact" page
     Then the page should have a meta description tag
+
+  Scenario: About page has a meta description tag (healthcheck)
+    Given I open the "About" page
+    Then the page should have a meta description tag
